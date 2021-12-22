@@ -2271,16 +2271,19 @@ class ContainerArea extends StatelessWidget {
                       onPanDown: (DragDownDetails details) {
                         _performPanDown(details);
                       },
-                      onVerticalDragUpdate: isXYPanMode || isYPan
-                          ? (DragUpdateDetails details) {
-                              _performPanUpdate(details);
-                            }
-                          : null,
-                      onVerticalDragEnd: isXYPanMode || isYPan
-                          ? (DragEndDetails details) {
-                              _performPanEnd(details);
-                            }
-                          : null,
+                      // onVerticalDragUpdate: isXYPanMode || isYPan
+                      //     ? (DragUpdateDetails details) {
+                      //         _performPanUpdate(details);
+                      //       }
+                      //     : null,
+                      // onVerticalDragEnd: isXYPanMode || isYPan
+                      //     ? (DragEndDetails details) {
+                      //         _performPanEnd(details);
+                      //       }
+                      //     : null,
+                      onScaleUpdate: (ScaleUpdateDetails details) {
+                        _performPanUpdate(details.focalPoint);
+                      },
                       onHorizontalDragUpdate: isXYPanMode || isXPan
                           ? (DragUpdateDetails details) {
                               _performPanUpdate(details);
@@ -3403,15 +3406,15 @@ class ContainerArea extends StatelessWidget {
   }
 
   /// Update the details for pan
-  void _performPanUpdate(DragUpdateDetails details) {
+  void _performPanUpdate(Offset globalPosition) {
     Offset? position;
     _stateProperties.currentPosition =
-        renderBox.globalToLocal(details.globalPosition);
+        renderBox.globalToLocal(globalPosition);
     final ZoomingBehaviorDetails zoomingBehaviorDetails =
         ZoomPanBehaviorHelper.getRenderingDetails(
             _stateProperties.zoomPanBehaviorRenderer);
     if (zoomingBehaviorDetails.isPinching != true) {
-      position = renderBox.globalToLocal(details.globalPosition);
+      position = renderBox.globalToLocal(globalPosition);
       if (zoomingBehaviorDetails.isPanning == true &&
           chart.zoomPanBehavior.enablePanning &&
           zoomingBehaviorDetails.previousMovedPosition != null &&
