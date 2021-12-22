@@ -3106,9 +3106,10 @@ class ContainerArea extends StatelessWidget {
         axisDetails.zoomFactor = zoomEndArgs.currentZoomFactor;
         axisDetails.zoomPosition = zoomEndArgs.currentZoomPosition;
       }
-      if (axisDetails.zoomFactor.toInt() == 1 &&
+      if ((axisDetails.zoomFactor.isNaN || axisDetails.zoomFactor.isInfinite) ||
+          (axisDetails.zoomFactor.toInt() == 1 &&
           axisDetails.zoomPosition.toInt() == 0 &&
-          chart.onZoomReset != null) {
+          chart.onZoomReset != null)){
         resetFlag = true;
       }
       _stateProperties.zoomAxes = <ZoomAxisRange>[];
