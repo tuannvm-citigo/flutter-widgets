@@ -12,10 +12,5 @@ dependencies:
   intl: ^0.17.0
   vector_math: ">=2.1.0 <=3.0.0"
   syncfusion_flutter_core:
-    git:
-      url: https://github.com/tuannvm-citigo/flutter-widgets.git
-      path: packages/syncfusion_flutter_core
-      ref: master
-
 
 flutter:
