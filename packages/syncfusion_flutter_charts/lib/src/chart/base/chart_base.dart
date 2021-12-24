@@ -2286,7 +2286,7 @@ class ContainerArea extends StatelessWidget {
                       },
                       onHorizontalDragUpdate: isXYPanMode || isXPan
                           ? (DragUpdateDetails details) {
-                              _performPanUpdate(details);
+                              _performPanUpdate(details.globalPosition);
                             }
                           : null,
                       onHorizontalDragEnd: isXYPanMode || isXPan
